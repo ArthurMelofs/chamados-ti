@@ -601,3 +601,39 @@ time.muted { font-size: 12px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
+
+.usuario-logado {
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+#nomeUsuario {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    overflow-wrap: anywhere;
+}
+
+#perfilUsuario {
+    display: inline-block;
+    margin: 8px 0;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #7c3aed;
+    color: #ffffff;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+#sair {
+    margin-top: 10px;
+    background: #dc2626;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#sair:hover {
+    background: #b91c1c;
+}

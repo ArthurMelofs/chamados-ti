@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | HelpDesk TI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      margin: 0;
+    }
+    main {
+      background: white;
+      padding: 32px;
+      width: min(360px, 90%);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px #0001;
+    }
+    h1 { color: #17365d; }
+    input, button {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 12px;
+      margin: 7px 0;
+      border-radius: 6px;
+    }
+    input { border: 1px solid #ccc; }
+    button {
+      border: none;
+      background: #17365d;
+      color: white;
+      cursor: pointer;
+    }
+    #google { background: #444; }
+    #mensagem { color: #b91c1c; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>HelpDesk TI</h1>
+    <p>Entre ou crie sua conta</p>
+
+    <form id="formAuth">
+      <input id="nome" placeholder="Nome completo"
+             autocomplete="name">
+      <input id="email" type="email"
+             placeholder="E-mail" required
+             autocomplete="email">
+      <input id="senha" type="password"
+             placeholder="Senha" required
+             autocomplete="current-password">
+
+      <button type="submit">Entrar</button>
+      <button type="button" id="cadastrar">
+        Criar conta
+      </button>
+    </form>
+
+    <button type="button" id="google">
+      Entrar com Google
+    </button>
+
+    <p id="mensagem" role="alert"></p>
+  </main>
+
+  <script type="module" src="/js/auth.js"></script>
+</body>
+</html>

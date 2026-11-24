@@ -1,11 +1,26 @@
 const express = require('express');
+
 const dashboard = require('../controllers/dashboardController');
 const tickets = require('../controllers/ticketController');
 const comments = require('../controllers/commentController');
 const technicians = require('../controllers/technicianController');
 const categories = require('../controllers/categoryController');
+const users = require('../controllers/userController');
+
+const {
+    exigirLogin,
+    exigirAdmin
+} = require('../middlewares/authMiddleware');
 
 const router = express.Router();
+
+// Autenticação obrigatória
+router.use(exigirLogin);
+
+// Rotas administrativas
+router.use('/technicians', exigirAdmin);
+router.use('/categories', exigirAdmin);
+router.use('/users', exigirAdmin);
 
 // Dashboard
 router.get('/', dashboard.index);
@@ -14,11 +29,13 @@ router.get('/', dashboard.index);
 router.get('/tickets', tickets.index);
 router.get('/tickets/new', tickets.new);
 router.post('/tickets', tickets.create);
+
 router.get('/tickets/:id', tickets.show);
 router.get('/tickets/:id/edit', tickets.edit);
 router.put('/tickets/:id', tickets.update);
 router.patch('/tickets/:id/quick', tickets.quickUpdate);
 router.delete('/tickets/:id', tickets.destroy);
+
 router.post('/tickets/:id/comments', comments.create);
 
 // Técnicos
@@ -36,5 +53,10 @@ router.post('/categories', categories.create);
 router.get('/categories/:id/edit', categories.edit);
 router.put('/categories/:id', categories.update);
 router.delete('/categories/:id', categories.destroy);
+
+// Usuários
+router.get('/users', users.index);
+router.put('/users/:uid', users.update);
+router.delete('/users/:uid', users.destroy);
 
 module.exports = router;

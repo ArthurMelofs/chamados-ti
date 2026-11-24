@@ -1,0 +1,121 @@
+<%- include('../partials/header') %>
+
+<header class="page-header">
+    <div>
+        <h1>Gerenciar usuários</h1>
+        <p class="subtitle">
+            Gerencie as contas e permissões do sistema.
+        </p>
+    </div>
+</header>
+
+<section class="card">
+
+    <% usuarios.forEach(function(u) { %>
+
+        <div style="padding: 20px; border-bottom: 1px solid #333;">
+
+            <h2><%= u.nome || 'Sem nome' %></h2>
+
+            <p class="muted"><%= u.email %></p>
+
+            <p style="margin: 12px 0;">
+                Perfil atual:
+                <strong>
+                    <%= (u.perfil || 'user').toUpperCase() %>
+                </strong>
+            </p>
+
+            <% if (u.uid !== usuario.uid) { %>
+
+                <form method="POST"
+                      action="/users/<%= u.uid %>?_method=PUT">
+
+                    <div class="field-row">
+
+                        <div class="field">
+                            <label>Perfil</label>
+
+                            <select name="perfil">
+
+                                <option value="user"
+                                    <%= u.perfil === 'user' ? 'selected' : '' %>>
+                                    Usuário
+                                </option>
+
+                                <option value="tecnico"
+                                    <%= u.perfil === 'tecnico' ? 'selected' : '' %>>
+                                    Técnico
+                                </option>
+
+                                <option value="admin"
+                                    <%= u.perfil === 'admin' ? 'selected' : '' %>>
+                                    Administrador
+                                </option>
+
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Vincular técnico</label>
+
+                            <select name="technicianId">
+
+                                <option value="">
+                                    Nenhum
+                                </option>
+
+                                <% tecnicos.forEach(function(t) { %>
+
+                                    <option value="<%= t.id %>"
+                                        <%= Number(u.technicianId) === t.id ? 'selected' : '' %>>
+
+                                        <%= t.nome %>
+
+                                    </option>
+
+                                <% }) %>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+
+                        Salvar perfil
+
+                    </button>
+
+                </form>
+
+                <form method="POST"
+                      action="/users/<%= u.uid %>?_method=DELETE"
+                      data-confirm="Deseja excluir este usuário?"
+                      style="margin-top: 10px;">
+
+                    <button type="submit"
+                            class="btn btn-danger">
+
+                        Excluir usuário
+
+                    </button>
+
+                </form>
+
+            <% } else { %>
+
+                <p class="muted">
+                    Esta é sua conta administrativa.
+                </p>
+
+            <% } %>
+
+        </div>
+
+    <% }) %>
+
+</section>
+
+<%- include('../partials/footer') %>
